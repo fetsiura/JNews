@@ -135,7 +135,7 @@
         <div class="container">
           <div class="row row-30">
             <div class="col-md-10 wow fadeInUp">
-                <input type="text" class="input col-md-6" placeholder="write category ..."> <button type="submit" class="button-circle search-submit" >SHOW</button>
+                <input type="text" class="input col-md-6" placeholder="Write category ..."> <button type="submit" class="button-circle search-submit" >SHOW</button>
             </div>
           </div>
         </div>
@@ -197,19 +197,34 @@
         </div>
       </section>
 
+<!--      -->
+<!--      <div th:each="news: ${newsAll}">-->
+<!--        <div th:text="${news.title}"></div>-->
+<!--        <div th:text="${news.url}"></div>-->
+<!--        <div th:text="${news.urlToImage}"></div>-->
+<!--        <div th:text="${news.description}"></div>-->
+<!--        <div th:text="${news.source}"></div>-->
+
+<!--      </div>-->
+<!--      -->
+
       <!-- News GROUP-->
       <section class="section bg-default section-md">
         <div class="container">
           <h2 class="title-icon"><span class="icon icon-default mercury-icon-news"></span><span>Breaking <span class="text-light">NEWS</span></span></h2>
 
-          <div class="box-image-small box-image-small-left">
-            <div class="item-image bg-image novi-nackground" style="background-image: url(images/index-1-2-586x334.jpg)"></div>
+
+          <div th:each="oneNews: ${news}" class="box-image-small box-image-small-left">
+            <div class="item-image bg-image novi-nackground" >
+              <img th:src="${oneNews.urlToImage}" alt="" >
+            </div>
             <div class="item-body wow fadeInRight">
               <p>July 12, 2019</p>
-              <h4><a href="#">Saving Money When Paying Taxes</a></h4>
-              <p class="big">If you’re like a majority of Americans, you may be looking for new, creative ways to ease your annual tax burden. Fortunately, there are several things you can do to cut your taxes or increase...</p>
+              <h4><a th:text="${oneNews.title}"></a></h4>
+              <p class="big" th:text="${oneNews.description}"></p>
             </div>
-            <div><button type="button" class="button-circle">MORE...</button> </div>
+            <div><a th:href="${oneNews.url}" target="_blank" rel="noopener noreferrer" type="button" class="button-circle">MORE...</a> </div>
+            <p>           </p><br>
           </div>
 
 
@@ -302,8 +317,8 @@
       </footer>
     </div>
     <div class="snackbars" id="form-output-global"></div>
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
+    <script th:src="@{/js/core.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
     <!--coded by Starlight-->
   </body>
 </html>
