@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 class Response {
 
-    private Long totalResults;
+    private Integer totalResults;
     private List<NewsResponse> articles;
 }

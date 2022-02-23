@@ -1,6 +1,7 @@
 package pl.jnews.infrastructure.newsdata;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import pl.jnews.core.news.News;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class NewsDataClient {
@@ -24,16 +26,20 @@ public class NewsDataClient {
 
     private final RestTemplate restTemplate;
 
-    private final String urlToPolandNews = "https://newsapi.org/v2/top-headlines?country=pl";
-    private final String urlToCategoryNews = "https://newsapi.org/v2/everything?q=ukraine";
-    private final String addLanguage = "&language=";
-    private final String urlWhenInputIsEmpty = "https://newsapi.org/v2/top-headlines?q=general";
+    public List<News> newsHandler (String url){
+        String TOKENIZER = TOKEN_1;
+        if(APICounter ==90){
+            TOKENIZER =TOKEN_2;
+        } else if(APICounter ==180){
+            TOKENIZER =TOKEN_3;
+        } else if(APICounter ==270){
+            TOKENIZER =TOKEN_4;
+        }
 
-    public List<News> newsHandler (){
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity entity =new HttpEntity(httpHeaders);
-        httpHeaders.add("X-Api-Key",TOKEN_1);
-        ResponseEntity<Response> response = restTemplate.exchange(urlToCategoryNews,
+        httpHeaders.add("X-Api-Key",TOKENIZER);
+        ResponseEntity<Response> response = restTemplate.exchange(url,
                 HttpMethod.GET,
                 entity,
                 Response.class);
@@ -53,6 +59,7 @@ public class NewsDataClient {
             converter.setSource(newsResponse.getSource().getName());
             convertedNews.add(converter);
         }
+        log.info("APICounter - {}", APICounter++);
         return convertedNews;
 
     }
