@@ -27,7 +27,6 @@ class Controller {
     @GetMapping
     public String home(Model model){
             model.addAttribute("news",newsService.getNewsWhenInputEmpty());
-            cryptoService.getListOfCrypto();
             return "index";
     }
 
@@ -44,7 +43,12 @@ class Controller {
         return "index";
     }
 
+    @GetMapping("/cryptocurrency")
+    public String cryptocurrencyForm(Model model){
 
+        model.addAttribute("cryptos",cryptoService.getListOfCrypto());
+        return "cryptocurrency";
+    }
 
 
     Boolean check(String word){

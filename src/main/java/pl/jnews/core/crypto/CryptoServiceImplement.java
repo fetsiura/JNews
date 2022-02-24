@@ -10,27 +10,12 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CryptoServiceImplement implements CryptoService{
+public class CryptoServiceImplement {
 
-    private final CryptoRepository cryptoRepository;
+
     private final CryptoDataClient cryptoDataClient;
-    @Override
-    public String getListOfCrypto(){
-        return "ok";
+    public List<Crypto> getListOfCrypto(){
+        return cryptoDataClient.cryptoHandler();
     }
 
-    @Override
-    public List<Crypto> getAll() {
-        return cryptoRepository.findAll();
-    }
-
-    @Override
-    public void add(Crypto crypto) {
-        cryptoRepository.save(crypto);
-    }
-
-    @Override
-    public void delete(Long id) {
-        cryptoRepository.deleteById(id);
-    }
 }

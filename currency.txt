@@ -1,0 +1,10 @@
+algorand
+avalanche-2
+binancecoin
+bitcoin
+bitcoin-cash
+bora
+cardano
+chainlink
+chiliz
+cosmos
