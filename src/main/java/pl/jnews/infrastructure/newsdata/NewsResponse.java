@@ -1,10 +1,6 @@
 package pl.jnews.infrastructure.newsdata;
 
 import lombok.Data;
-import pl.jnews.core.news.News;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class NewsResponse {

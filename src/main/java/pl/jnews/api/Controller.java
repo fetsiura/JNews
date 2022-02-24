@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.jnews.core.crypto.CryptoServiceImplement;
 import pl.jnews.core.news.NewsServiceImplement;
+import pl.jnews.infrastructure.weatherdata.CryptoDataClient;
 
 import java.util.Optional;
 
@@ -19,13 +21,14 @@ import java.util.Optional;
 class Controller {
 
     private final NewsServiceImplement newsService;
-
+    private final CryptoServiceImplement cryptoService;
 
 
     @GetMapping
     public String home(Model model){
             model.addAttribute("news",newsService.getNewsWhenInputEmpty());
-        return "index";
+            cryptoService.getListOfCrypto();
+            return "index";
     }
 
 
