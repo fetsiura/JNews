@@ -1,0 +1,14 @@
+package pl.jnews.core.crypto;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface CryptoRepository extends JpaRepository<Crypto,Long> {
+    @Query(nativeQuery = true,
+            value = "SELECT * FROM crypto ORDER BY name ASC")
+    List<Crypto> findCryptoByNameAtoZ();
+}

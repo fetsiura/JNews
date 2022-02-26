@@ -5,14 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.jnews.core.crypto.CryptoServiceImplement;
 import pl.jnews.core.news.NewsServiceImplement;
-import pl.jnews.infrastructure.weatherdata.CryptoDataClient;
-
-import java.util.Optional;
 
 @Slf4j
 @org.springframework.stereotype.Controller
@@ -45,8 +41,11 @@ class Controller {
 
     @GetMapping("/cryptocurrency")
     public String cryptocurrencyForm(Model model){
+        if(cryptoService.getAllFromDatabase().size()==0){
+            cryptoService.getCryptoList();
+        }
+        model.addAttribute("cryptos",cryptoService.getAllFromDatabase());
 
-        model.addAttribute("cryptos",cryptoService.getListOfCrypto());
         return "cryptocurrency";
     }
 

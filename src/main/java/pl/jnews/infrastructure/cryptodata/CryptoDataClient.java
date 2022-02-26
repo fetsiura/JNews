@@ -1,4 +1,4 @@
-package pl.jnews.infrastructure.weatherdata;
+package pl.jnews.infrastructure.cryptodata;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @Component
@@ -43,7 +41,6 @@ public class CryptoDataClient {
                 HttpMethod.GET,
                 entity,
                 String.class);
-        log.error(exchange.getBody().toString());
         Crypto crypto = new Crypto();
             String[] split = exchange.getBody().split(":");
             String price = split[2].substring(0, split[2].length() - 2);
