@@ -17,21 +17,25 @@ public class test {
 
 
         List<String> districts = new ArrayList<>();
-
-        LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-dd");
-        String textDate = formatter.format(date);
-        String interia = "https://pogoda.interia.pl";
+        String world = "https://www.kaggle.com/nikitagrec/world-capitals-gps";
 
         try {
-            Document poland = Jsoup.connect("https://pogoda.interia.pl/polska").get();
-            Elements elements = poland.getElementsByTag("area");
+            Document poland = Jsoup.connect("https://www.kaggle.com/nikitagrec/world-capitals-gps").get();
+            Element body = poland.body();
 
-            for (Element element : elements) {
-                String place = element.attr("href");  /// bez lambdy
-                districts.add(interia + place);
-            }
-            districts = elements.stream().map(element -> element.attr("href")).map(place -> interia + place).collect(Collectors.toList());
+
+
+
+
+//            for (Element element : elementsByClass) {
+//                String attr = element.attr("href");/// bez lambdy
+//                System.out.println(attr);
+//                Element a = element.select("a").first();
+//                String href = a.attr("href");
+//                System.out.println(href);
+//                System.out.println(element);
+//            }
+//            districts = elements.stream().map(element -> element.attr("href")).map(place -> interia + place).collect(Collectors.toList());
 
         } catch (Exception e) {
             e.printStackTrace();
