@@ -23,6 +23,32 @@ public class CityServiceImplement implements CityService{
         log.info("Cities download to database");
     }
 
+
+
+    public List<City> cityByTemperatureLowToHigh(){
+        return cityRepository.findCitiesByTemperatureLowToHigh();
+    }
+    public List<City> cityByTemperatureHighToLow(){
+        return cityRepository.findCitiesByTemperatureHighToLow();
+    }
+    public List<City> cityByNameASC(){
+        return cityRepository.findCitiesByNameAtoZ();
+    }
+    public List<City> cityByNameDESC(){
+        return cityRepository.findCitiesByNameZtoA();
+    }
+    public List<City> cityByWindSpeed(){
+        return cityRepository.findCitiesByWindSpeed();
+    }
+
+//    public List<City> countCity(){
+//        return cityRepository.countCity();
+//    }
+
+    public List<City> cityByNameStartWith(String name){
+        return cityRepository.findCitiesByNameStartsWith(name);
+    }
+
     @Override
     public List<City> getAllCities() {
        return cityRepository.findAll();

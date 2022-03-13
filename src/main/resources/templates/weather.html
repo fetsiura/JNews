@@ -133,12 +133,19 @@
 
   <section class="section bg-default section-md">
     <div class="container">
-      <h2 class="title-icon"><span class="icon icon-default mercury-icon-news"></span><span>Weather <span class="text-light">by city</span></span></h2>
+      <h2 class="title-icon"><span class="icon icon-default mercury-icon-news"></span><span>Weather <span class="text-light">by capitals</span></span></h2>
       <div class="row row-30">
         <!--            news input -->
-        <form th:action="@{/}" method="post">
+        <form th:action="@{/weather}" method="post">
+          <select class="input col-md-4" name="filter">
+            <option value="tempHighToLow">Temp: High to Low</option>
+            <option value="tempLowToHigh">Temp: Low to High</option>
+            <option value="nameAtoZ">Name: A-Z</option>
+            <option value="nameZtoA">Name: Z-A</option>
+            <option value="wind">Wind</option>
+          </select>
           <div class="col-md-10 wow fadeInUp">
-            <input type="text" class="input col-md-6" name="category" placeholder="Write category ..."> <button type="submit" class="button-circle search-submit" >SHOW</button>
+            <input type="text" class="input col-md-10" name="name" placeholder="Find city ..."> <button type="submit" class="button-circle search-submit" >FIND</button>
           </div>
         </form>
 
@@ -165,7 +172,7 @@
           <td th:text="${city.id}"></td>
           <td th:text="${city.name}"></td>
           <td th:text="${city.country}"></td>
-          <td th:text="${city.temperatura}"></td>
+          <td th:text="${city.temperature}"></td>
           <td th:text="${city.feelsLike}"></td>
           <td th:text="${city.clouds}"></td>
           <td th:text="${city.windSpeed}"></td>
@@ -176,13 +183,6 @@
         </tr>
         </tbody>
       </table>
-      <div>
-        <table>
-
-
-        </table>
-
-      </div>
     </div>
   </section>
 

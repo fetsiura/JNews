@@ -2,13 +2,11 @@ package pl.jnews.core.weather;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "cities")
 public class City {
 
     @Id
@@ -19,7 +17,7 @@ public class City {
     private String latitude;
     private String longitude;
     private String clouds;
-    private Short temperatura;
+    private Short temperature;
     private Short feelsLike;
     private Short pressure;
     private Short humidity;

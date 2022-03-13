@@ -9,4 +9,5 @@ interface NewsService {
     List<News> getNewsWithCategory(String category);
     void add(News news);
     void delete(Long id);
+
 }

@@ -73,7 +73,7 @@ public class WeatherDataClient {
             city.setHumidity(body.getMain().getHumidity());
             city.setFeelsLike((short) (body.getMain().getFeels_like()-273.15));
             city.setPressure(body.getMain().getPressure());
-            city.setTemperatura((short) (body.getMain().getTemp()-273.15));
+            city.setTemperature((short) (body.getMain().getTemp()-273.15));
             city.setWindSpeed(body.getWind().getSpeed());
             cities.add(city);
             APICounter++;

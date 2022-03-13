@@ -37,6 +37,7 @@ public class NewsServiceImplement implements NewsService{
         return newsDataClient.newsHandler(urlToCategoryNewsStart.concat(category).concat(urlToCategoryNewsEnd));
     }
 
+
     @Override
     public void add(News news) {
 
