@@ -55,7 +55,9 @@ class Controller {
 
     @GetMapping("/weather")
     public String getWeather(Model model){
-        cityService.addCityToDatabase();
+        if(cityService.getAllCities().size()==0){
+            cityService.addCityToDatabase();
+        }
         model.addAttribute("cities",cityService.getAllCities());
         return "weather";
     }

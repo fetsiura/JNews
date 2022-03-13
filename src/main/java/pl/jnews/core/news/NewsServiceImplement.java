@@ -12,8 +12,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NewsServiceImplement implements NewsService{
 
-    private final String urlToCategoryNews = "https://newsapi.org/v2/everything?q=";
-    private final String urlWhenInputEmpty = "https://newsapi.org/v2/top-headlines?q=general";
+    private final String urlToCategoryNewsStart = "https://newsapi.org/v2/everything?q=";
+    private final String urlToCategoryNewsEnd = "&sortBy=popularity&pageSize=100";
+    private final String urlWhenInputEmpty = "https://newsapi.org/v2/top-headlines?category=general&country=us&pageSize=100";
 
 
     private final NewsRepository newsRepository;
@@ -33,7 +34,7 @@ public class NewsServiceImplement implements NewsService{
 
     @Override
     public List<News> getNewsWithCategory(String category) {
-        return newsDataClient.newsHandler(urlToCategoryNews.concat(category));
+        return newsDataClient.newsHandler(urlToCategoryNewsStart.concat(category).concat(urlToCategoryNewsEnd));
     }
 
     @Override

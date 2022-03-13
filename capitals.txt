@@ -6,7 +6,7 @@ American Samoa;Pago Pago;-14.266666666666667;-170.700000
 Andorra;Andorra la Vella;42.5;1.516667
 Angola;Luanda;-8.833333333333334;13.216667
 Anguilla;The Valley;18.216666666666665;-63.050000
-Antarctica;N/A;0;0.000000
+Antarctica;Antarctica;0;0.000000
 Antigua and Barbuda;Saint John's;17.116666666666667;-61.850000
 Argentina;Buenos Aires;-34.583333333333336;-58.666667
 Armenia;Yerevan;40.166666666666664;44.500000

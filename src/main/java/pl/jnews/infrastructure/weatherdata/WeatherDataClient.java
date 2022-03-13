@@ -79,7 +79,6 @@ public class WeatherDataClient {
             APICounter++;
             id++;
 
-            log.error(city.toString());
 
         }
 
