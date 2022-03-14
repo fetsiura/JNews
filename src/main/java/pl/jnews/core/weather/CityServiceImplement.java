@@ -41,16 +41,12 @@ public class CityServiceImplement implements CityService{
         return cityRepository.findCitiesByWindSpeed();
     }
 
-//    public List<City> countCity(){
-//        return cityRepository.countCity();
-//    }
+    public Integer countAllCity(){
+        return cityRepository.countAllCity();
+    }
 
     public List<City> cityByNameStartWith(String name){
         return cityRepository.findCitiesByNameStartsWith(name);
     }
 
-    @Override
-    public List<City> getAllCities() {
-       return cityRepository.findAll();
-    }
 }

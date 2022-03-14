@@ -14,8 +14,6 @@ interface CityRepository extends JpaRepository<City,Long> {
             value = "SELECT * FROM cities ORDER BY temperature ASC")
     List<City> findCitiesByTemperatureLowToHigh();
 
-    @Query("SELECT c FROM City c WHERE c.name LIKE :name%")
-    List<City> findCitiesByNameStartsWith(@Param("name") String name);
 
     @Query(nativeQuery = true,
             value = "SELECT * FROM cities ORDER BY temperature DESC")
@@ -33,5 +31,11 @@ interface CityRepository extends JpaRepository<City,Long> {
             value = "SELECT * FROM cities ORDER BY wind_Speed DESC")
     List<City> findCitiesByWindSpeed();
 
-//    List<City> countCity();
+    @Query(nativeQuery = true,
+    value = "SELECT COUNT(*) FROM CITIES")
+    Integer countAllCity();
+
+
+    @Query("SELECT c FROM City c WHERE c.name LIKE :name%")
+    List<City> findCitiesByNameStartsWith(@Param("name") String name);
 }

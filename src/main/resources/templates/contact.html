@@ -130,44 +130,37 @@
     </div>
   </section>
 
-  <!-- News GROUP-->
-
-  <section class="section bg-default section-md">
+  <!-- Contacts-->
+  <section class="section section-md">
     <div class="container">
-      <h2 class="title-icon"><span class="icon icon-default mercury-icon-news"></span><span>Crypto <span class="text-light">currencies</span></span></h2>
-      <div class="row row-30">
-        <!--            news input -->
-        <form th:action="@{/}" method="post">
-          <div class="col-md-10 wow fadeInUp">
-            <input type="text" class="input col-md-6" name="category" placeholder="Write category ..."> <button type="submit" class="button-circle search-submit" >SHOW</button>
+      <h2>Contacts</h2>
+      <div class="row row-40">
+        <div class="col-md-10 col-lg-6">
+          <div class="row row-30">
+            <div class="col-sm-6">
+              <blockquote class="quote quote-center quote-center-active">
+                <div class="quote-meta"><img class="quote-img" src="images/user-info.png" alt="" width="138" height="69"/>
+                  <div class="author">
+                    <cite>Jarosław Fetsiura</cite>
+                  </div>
+                  <div class="position">Developer</div>
+                </div>
+              </blockquote>
+            </div>
           </div>
-        </form>
-
-      </div>
-      <!--          news generator-->
-      <table id="example" class="table table-bordered tab-pane" style="width: 100%">
-        <thead>
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Price USD</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="crypto : ${cryptos}">
-
-          <td ><img  th:src="@{${'/images/currency/' + crypto.name+ '.png'}}" width="30" height="30" ></td>
-          <td th:text="${crypto.name.toUpperCase()}"></td>
-          <td th:text="${crypto.price}"></td>
-        </tr>
-        </tbody>
-      </table>
-      <div>
-        <table>
-
-
-        </table>
-
+          <div class="group-lg group-wrap-3">
+            <div class="group-item">
+              <dl class="list-terms-2">
+                <dt>Phone:</dt>
+                <dd><a href="tel:#">+48 791 850 113</a></dd>
+              </dl>
+              <dl class="list-terms-2">
+                <dt>Email:</dt>
+                <dd><a href="tel:#">fetsiura@gmail.com</a></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

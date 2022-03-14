@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Slf4j
 @Component
@@ -65,10 +66,8 @@ public class WeatherDataClient {
 
             City city = new City();
             city.setId(id);
-            city.setName(split[1]);
+            city.setName(split[1].toUpperCase(Locale.ROOT));
             city.setCountry(split[0]);
-            city.setLatitude(split[2]);
-            city.setLongitude(split[3]);
             city.setClouds(body.getWeather().get(0).getDescription());
             city.setHumidity(body.getMain().getHumidity());
             city.setFeelsLike((short) (body.getMain().getFeels_like()-273.15));

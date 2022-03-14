@@ -5,18 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.jnews.core.crypto.Crypto;
 import pl.jnews.core.crypto.CryptoServiceImplement;
 import pl.jnews.core.news.NewsServiceImplement;
 import pl.jnews.core.weather.City;
-import pl.jnews.core.weather.CityService;
 import pl.jnews.core.weather.CityServiceImplement;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Locale;
 
 @Slf4j
 @org.springframework.stereotype.Controller
@@ -59,12 +54,14 @@ class Controller {
     }
 
 
+
+
     @GetMapping("/weather")
     public String getWeather(Model model){
-        if(cityService.getAllCities().size()==0){
+        if(cityService.countAllCity()<1){
             cityService.addCityToDatabase();
         }
-        model.addAttribute("cities",cityService.getAllCities());
+        model.addAttribute("cities",cityService.cityByNameASC());
         return "weather";
     }
 
@@ -73,10 +70,8 @@ class Controller {
                              @Param("filter") String filter,
                              @Param("name")String name){
         List<City> cities = new ArrayList<>();
-//        if(cityService.countCity().size()==0){
-//            cityService.addCityToDatabase();
-//        }
 
+        ///jeżeli nie wpisano nazwy miasta sortujemy po wybranym wskaźniku
         if(name.isEmpty()){
             if (filter.contains("tempHighToLow")) {
                 cities=cityService.cityByTemperatureHighToLow();
@@ -89,13 +84,19 @@ class Controller {
             } else if (filter.contains("wind")) {
                 cities=cityService.cityByWindSpeed();
             } else {
-                cities=cityService.getAllCities();
+                cities=cityService.cityByNameASC();
             }
         } else {
-            cities=cityService.cityByNameStartWith(name);
+            cities=cityService.cityByNameStartWith(name.toUpperCase(Locale.ROOT));
         }
         model.addAttribute("cities",cities);
         return "weather";
+    }
+
+
+    @GetMapping("/contact")
+    public String getContacts(){
+        return "contact";
     }
 
 

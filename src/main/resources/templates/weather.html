@@ -65,8 +65,9 @@
                     </li>
                     <li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/cryptocurrency}">Crypto</a>
                     </li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/contact}">Contacts</a>
-                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/weather}">Weather</a>
+                    </li><li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/contact}">Contacts</a>
+                  </li>
                   </ul>
                 </div>
               </div>
@@ -137,24 +138,27 @@
       <div class="row row-30">
         <!--            news input -->
         <form th:action="@{/weather}" method="post">
-          <select class="input col-md-4" name="filter">
+          <div class="col-md-10 wow fadeInUp">
+
+          <select class="input col-md-10" name="filter">
             <option value="tempHighToLow">Temp: High to Low</option>
             <option value="tempLowToHigh">Temp: Low to High</option>
             <option value="nameAtoZ">Name: A-Z</option>
             <option value="nameZtoA">Name: Z-A</option>
-            <option value="wind">Wind</option>
+            <option value="wind">Wind speed</option>
           </select>
+          </div>
+
           <div class="col-md-10 wow fadeInUp">
             <input type="text" class="input col-md-10" name="name" placeholder="Find city ..."> <button type="submit" class="button-circle search-submit" >FIND</button>
           </div>
         </form>
 
       </div>
-      <!--          news generator-->
+      <!--   cities generator-->
       <table id="example" class="table table-bordered tab-pane" style="width: 100%">
         <thead>
         <tr>
-          <th>#</th>
           <th>CITY</th>
           <th>COUNTRY</th>
           <th>TEMP °C</th>
@@ -163,13 +167,10 @@
           <th>WIND m/s</th>
           <th>PRESSURE</th>
           <th>HUMIDITY</th>
-          <th>LATITUDE</th>
-          <th>LONGITUDE</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="city : ${cities}">
-          <td th:text="${city.id}"></td>
           <td th:text="${city.name}"></td>
           <td th:text="${city.country}"></td>
           <td th:text="${city.temperature}"></td>
@@ -178,8 +179,6 @@
           <td th:text="${city.windSpeed}"></td>
           <td th:text="${city.pressure}"></td>
           <td th:text="${city.humidity}"></td>
-          <td th:text="${city.latitude}"></td>
-          <td th:text="${city.longitude}"></td>
         </tr>
         </tbody>
       </table>

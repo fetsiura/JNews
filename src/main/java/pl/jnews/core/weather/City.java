@@ -14,8 +14,6 @@ public class City {
     private Integer id;
     private String name;
     private String country;
-    private String latitude;
-    private String longitude;
     private String clouds;
     private Short temperature;
     private Short feelsLike;
