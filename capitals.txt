@@ -90,9 +90,9 @@ Guinea;Conakry;9.5;-13.700000
 Guinea-Bissau;Bissau;11.85;-15.583333
 Guyana;Georgetown;6.8;-58.150000
 Haiti;Port-au-Prince;18.533333333333335;-72.333333
-Heard Island and McDonald Islands;N/A;0;0.000000
+Heard Island and McDonald Islands;Heard Island and McDonald Islands;0;0.000000
 Honduras;Tegucigalpa;14.1;-87.216667
-Hong Kong;N/A;0;0.000000
+Hong Kong;Hong Kong;0;0.000000
 Hungary;Budapest;47.5;19.083333
 Iceland;Reykjavik;64.15;-21.950000
 India;New Delhi;28.6;77.200000
@@ -122,7 +122,7 @@ Libya;Tripoli;32.88333333333333;13.166667
 Liechtenstein;Vaduz;47.13333333333333;9.516667
 Lithuania;Vilnius;54.68333333333333;25.316667
 Luxembourg;Luxembourg;49.6;6.116667
-Macau;N/A;0;0.000000
+Macau;Macau;0;0.000000
 Macedonia;Skopje;42;21.433333
 Madagascar;Antananarivo;-18.916666666666668;47.516667
 Malawi;Lilongwe;-13.966666666666667;33.783333

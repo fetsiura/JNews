@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.jnews.core.crypto.Crypto;
 import pl.jnews.core.crypto.CryptoServiceImplement;
 import pl.jnews.core.news.NewsServiceImplement;
 import pl.jnews.core.weather.City;
@@ -42,13 +43,39 @@ class Controller {
         return "index";
     }
 
-    @GetMapping("/cryptocurrency")
-    public String cryptocurrencyForm(Model model){
 
-        if(cryptoService.getAllFromDatabase().size()==0){
-            cryptoService.getCryptoList();
+    ////kontrolery kryptowalut
+    @GetMapping("/cryptocurrency")
+    public String cryptocurrencyGetForm(Model model){
+
+        if(cryptoService.countAllCrypto()<1){
+            cryptoService.addCryptoToDatabase();
         }
-        model.addAttribute("cryptos",cryptoService.getAllFromDatabase());
+        model.addAttribute("cryptos",cryptoService.findByNameASC());
+
+        return "cryptocurrency";
+    }
+
+    @PostMapping("/cryptocurrency")
+    public String cryptocurrencyPostForm(Model model,
+                                         @Param("filter") String filter,
+                                         @Param("name")String name){
+        List<Crypto> cryptos = new ArrayList<>();
+
+        //jeżeli nie wpisano nazwy kryptowaluty sortujemy po wybranym wskaźniku
+        if(name.isEmpty()){
+            if (filter.contains("priceHighToLow")) {
+                cryptos=cryptoService.findByPriceDESC();
+            } else if (filter.contains("priceLowToHigh")) {
+                cryptos=cryptoService.findByPriceASC();
+            } else {
+                cryptos=cryptoService.findByNameASC();
+            }
+        } else {
+
+            cryptos=cryptoService.findByNameStartsWith(name);
+        }
+        model.addAttribute("cryptos",cryptos);
 
         return "cryptocurrency";
     }
@@ -56,6 +83,8 @@ class Controller {
 
 
 
+
+    ////kontrolery pogody
     @GetMapping("/weather")
     public String getWeather(Model model){
         if(cityService.countAllCity()<1){
@@ -87,11 +116,13 @@ class Controller {
                 cities=cityService.cityByNameASC();
             }
         } else {
-            cities=cityService.cityByNameStartWith(name.toUpperCase(Locale.ROOT));
+            cities=cityService.cityByNameStartWith(name);
         }
         model.addAttribute("cities",cities);
         return "weather";
     }
+
+
 
 
     @GetMapping("/contact")

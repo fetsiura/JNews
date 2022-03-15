@@ -3,6 +3,8 @@ package pl.jnews.core.weather;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Entity
@@ -20,4 +22,14 @@ public class City {
     private Short pressure;
     private Short humidity;
     private Double windSpeed;
+
+
+    @Column(name = "updated")
+    private LocalTime updated;
+
+
+    @PreUpdate
+    public void preUpdate() {
+        updated = LocalTime.parse(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    }
 }

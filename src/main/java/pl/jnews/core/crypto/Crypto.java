@@ -2,10 +2,10 @@ package pl.jnews.core.crypto;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Entity
@@ -16,5 +16,17 @@ public class Crypto {
     private Long id;
     private String name;
     private Double price;
+
+
+    @Column(name = "updated")
+    private LocalTime updated;
+
+
+    @PreUpdate
+    public void preUpdate() {
+        updated = LocalTime.parse(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+    }
+
+
 
 }

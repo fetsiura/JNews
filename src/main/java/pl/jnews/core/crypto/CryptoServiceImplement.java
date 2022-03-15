@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.jnews.infrastructure.cryptodata.CryptoDataClient;
 
 import java.util.List;
+import java.util.Locale;
 
 @Slf4j
 @Service
@@ -15,23 +16,31 @@ public class CryptoServiceImplement implements CryptoService{
     private final CryptoRepository cryptoRepository;
     private final CryptoDataClient cryptoDataClient;
 
-
-
     @Override
-    public List<Crypto> getAllFromDatabase() {
+    public void addCryptoToDatabase() {
+        cryptoRepository.saveAll(cryptoDataClient.cryptoHandler());
+        log.info("Crypto download to database");
+    }
+
+
+    public Integer countAllCrypto(){
+        return cryptoRepository.countAllCrypto();
+    }
+
+    public List<Crypto> findByNameASC(){
         return cryptoRepository.findCryptoByNameAtoZ();
     }
 
-    @Override
-    public void getCryptoList(){
-        cryptoDataClient.cryptoHandler().stream()
-                .forEach(this::save);
 
+    public List<Crypto> findByPriceASC(){
+        return cryptoRepository.findCryptoByPriceHighToLow();
+    }
+    public List<Crypto> findByPriceDESC(){
+        return cryptoRepository.findCryptoByPriceLowToHigh();
     }
 
-    @Override
-    public void save(Crypto crypto) {
-        cryptoRepository.save(crypto);
+    public List<Crypto> findByNameStartsWith(String name){
+        return cryptoRepository.findByNameStartsWith(name.toLowerCase(Locale.ROOT));
     }
 
 }

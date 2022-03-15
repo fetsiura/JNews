@@ -27,6 +27,7 @@ public class CryptoDataClient {
     private final RestTemplate restTemplate;
 
     public List<Crypto> cryptoHandler(){
+        Long id = 1L;
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(" ","");
         HttpEntity entity = new HttpEntity(httpHeaders);
@@ -41,13 +42,16 @@ public class CryptoDataClient {
                 HttpMethod.GET,
                 entity,
                 String.class);
-        Crypto crypto = new Crypto();
             String[] split = exchange.getBody().split(":");
             String price = split[2].substring(0, split[2].length() - 2);
+
+            Crypto crypto = new Crypto();
+            crypto.setId(id);
             crypto.setName(currency);
             crypto.setPrice(Double.valueOf(price));
+            crypto.preUpdate();
             cryptos.add(crypto);
-
+            id++;
         }
         return cryptos;
 

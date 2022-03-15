@@ -67,13 +67,14 @@ public class WeatherDataClient {
             City city = new City();
             city.setId(id);
             city.setName(split[1].toUpperCase(Locale.ROOT));
-            city.setCountry(split[0]);
-            city.setClouds(body.getWeather().get(0).getDescription());
+            city.setCountry(split[0].toUpperCase(Locale.ROOT));
+            city.setClouds(body.getWeather().get(0).getDescription().toUpperCase(Locale.ROOT));
             city.setHumidity(body.getMain().getHumidity());
             city.setFeelsLike((short) (body.getMain().getFeels_like()-273.15));
             city.setPressure(body.getMain().getPressure());
             city.setTemperature((short) (body.getMain().getTemp()-273.15));
             city.setWindSpeed(body.getWind().getSpeed());
+            city.preUpdate();
             cities.add(city);
             APICounter++;
             id++;

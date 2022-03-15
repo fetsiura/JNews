@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.jnews.infrastructure.weatherdata.WeatherDataClient;
 
 import java.util.List;
+import java.util.Locale;
 
 
 @Slf4j
@@ -46,7 +47,7 @@ public class CityServiceImplement implements CityService{
     }
 
     public List<City> cityByNameStartWith(String name){
-        return cityRepository.findCitiesByNameStartsWith(name);
+        return cityRepository.findCitiesByNameStartsWith(name.toUpperCase(Locale.ROOT));
     }
 
 }
