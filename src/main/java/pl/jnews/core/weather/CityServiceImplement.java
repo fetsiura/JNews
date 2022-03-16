@@ -47,7 +47,7 @@ public class CityServiceImplement implements CityService{
     }
 
     public List<City> cityByNameStartWith(String name){
-        return cityRepository.findCitiesByNameStartsWith(name.toUpperCase(Locale.ROOT));
+        return cityRepository.findByNameStartsWith(name.toUpperCase(Locale.ROOT));
     }
 
 }

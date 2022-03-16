@@ -22,5 +22,6 @@ public class News {
     private String urlToImage;
     private String description;
     private String source;
+    private Long userId;
 
 }

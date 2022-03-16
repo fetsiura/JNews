@@ -12,7 +12,6 @@ import pl.jnews.core.weather.City;
 import pl.jnews.core.weather.CityServiceImplement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Slf4j
 @org.springframework.stereotype.Controller
@@ -23,6 +22,12 @@ class Controller {
     private final NewsServiceImplement newsService;
     private final CryptoServiceImplement cryptoService;
     private final CityServiceImplement cityService;
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
 
     @GetMapping
     public String home(Model model){
@@ -79,49 +84,6 @@ class Controller {
 
         return "cryptocurrency";
     }
-
-
-
-
-
-    ////kontrolery pogody
-    @GetMapping("/weather")
-    public String getWeather(Model model){
-        if(cityService.countAllCity()<1){
-            cityService.addCityToDatabase();
-        }
-        model.addAttribute("cities",cityService.cityByNameASC());
-        return "weather";
-    }
-
-    @PostMapping("/weather")
-    public String getWeather(Model model,
-                             @Param("filter") String filter,
-                             @Param("name")String name){
-        List<City> cities = new ArrayList<>();
-
-        ///jeżeli nie wpisano nazwy miasta sortujemy po wybranym wskaźniku
-        if(name.isEmpty()){
-            if (filter.contains("tempHighToLow")) {
-                cities=cityService.cityByTemperatureHighToLow();
-            } else if (filter.contains("tempLowToHigh")) {
-                cities= cityService.cityByTemperatureLowToHigh();
-            } else if (filter.contains("nameAtoZ")) {
-                cities= cityService.cityByNameASC();
-            } else if (filter.contains("nameZtoA")) {
-                cities=cityService.cityByNameDESC();
-            } else if (filter.contains("wind")) {
-                cities=cityService.cityByWindSpeed();
-            } else {
-                cities=cityService.cityByNameASC();
-            }
-        } else {
-            cities=cityService.cityByNameStartWith(name);
-        }
-        model.addAttribute("cities",cities);
-        return "weather";
-    }
-
 
 
 
