@@ -2,7 +2,7 @@ package pl.jnews.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.access.annotation.Secured;
+//import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import pl.jnews.core.weather.CityServiceImplement;
 import java.util.ArrayList;
 import java.util.List;
 
-@Secured("ROLE_USER")
+//@Secured("ROLE_USER")
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")

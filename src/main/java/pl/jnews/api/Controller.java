@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.jnews.core.crypto.Crypto;
 import pl.jnews.core.crypto.CryptoServiceImplement;
 import pl.jnews.core.news.NewsServiceImplement;
+import pl.jnews.core.user.UserServiceImplement;
 import pl.jnews.core.weather.CityServiceImplement;
 import pl.jnews.core.user.UserDto;
 
@@ -24,28 +25,8 @@ class Controller {
 
     private final NewsServiceImplement newsService;
     private final CryptoServiceImplement cryptoService;
-    private final CityServiceImplement cityService;
 
-    @GetMapping("/registration")
-    public String getRegistration(Model model){
-        model.addAttribute("userDto",new UserDto());
-        return "registration";
-    }
-
-    @PostMapping("/registration")
-    public String postRegistration(Model model,
-                                   @ModelAttribute("userDto") @Valid UserDto userDto,
-                                   BindingResult result){
-
-        return "registration";
-    }
-
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-
-
+    //// wyszukiwanie wiadomości
     @GetMapping
     public String home(Model model){
             model.addAttribute("news",newsService.getNewsWhenInputEmpty());

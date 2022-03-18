@@ -37,7 +37,6 @@
 			popover:                 $( '[data-toggle="popover"]' ),
 			preloader:               $( '.preloader' ),
 			rdNavbar:                $( '.rd-navbar' ),
-			rdMailForm:              $( '.rd-mailform' ),
 			rdInputLabel:            $( '.form-label' ),
 			regula:                  $( '[data-constraints]' ),
 			radio:                   $( 'input[type="radio"]' ),

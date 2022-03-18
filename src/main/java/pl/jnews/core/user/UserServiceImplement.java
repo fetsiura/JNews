@@ -2,7 +2,7 @@ package pl.jnews.core.user;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.jnews.core.role.Role;
 import pl.jnews.core.role.RoleRepository;
@@ -18,7 +18,7 @@ public class UserServiceImplement implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+//    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public User findByEmail(String email) {
@@ -32,13 +32,15 @@ public class UserServiceImplement implements UserService {
 
         user.setLogin(userDto.getLogin());
         user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPassword(
+                userDto.getPassword());
+//                passwordEncoder.encode(userDto.getPassword()));
         user.setEnabled(1);
         if(roleRepository.findByName("ROLE_USER") == null){
             createRole();
         }
         Role userRole = roleRepository.findByName("USER_ROLE");
-        user.setRoles(new HashSet<Role>(List.of(userRole)));
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
         log.info("User with email {} created",user.getEmail());
     }

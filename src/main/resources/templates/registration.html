@@ -84,23 +84,36 @@
         <div class="col-md-12">
           <div class="row justify-content-sm-center">
             <div class="col-sm-10 col-md-6 text-sm-left col-lg-6 col-xl-4 order-xl-3 order-lg-2 offset-xxl-1">
-              <!-- loginform -->
+              <!-- registration form -->
               <h4 class="form-group">Registration:</h4>
-              <form class="rd-mailform offset-top-34 offset-lg-top-0 text-left" data-form-output="form-output-global" data-form-type="contact" method="post" th:action="@{/registration}">
+              <form class="rd-mailform offset-top-34 offset-lg-top-0 text-left" data-form-output="form-output-global" data-form-type="contact" th:object="${userDto}" th:method="post" th:action="@{/registration}">
                 <div class="form-group">
-                  <input class="form-control input-sm form-control-impressed" type="text" name="login" placeholder="Login " id="login" onfocus="this.placeholder = 'Login'" onblur="this.placeholder = 'Login '" >
+                  <div>
+                    <input class="form-control input-sm form-control-impressed" type="text" id="login" th:field="*{login}" placeholder="Login "  onfocus="this.placeholder = 'Login'" onblur="this.placeholder = 'Login '" >
+                  </div>
+                  <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Name error</div>
                 </div>
                 <div class="form-group">
-                  <input class="form-control input-sm form-control-impressed" type="text" name="email" placeholder="Email " id="email" onfocus="this.placeholder = 'Email'" onblur="this.placeholder = 'Email '" >
+                  <div>
+                    <input class="form-control input-sm form-control-impressed" type="email" id="email" th:field="*{email}" placeholder="Email "  onfocus="this.placeholder = 'Email'" onblur="this.placeholder = 'Email '" >
+                  </div>
+                  <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name error</div>
                 </div>
-                <div class="form-group offset-top-20">
-                  <input class="form-control input-sm form-control-impressed" type="text" name="password" placeholder="Password " id="password" onfocus="this.placeholder = 'Password'" onblur="this.placeholder = 'Password '">
+                <div class="form-group">
+                  <div>
+                    <input class="form-control input-sm form-control-impressed" type="password" id="password" th:field="*{password}" placeholder="Password "  onfocus="this.placeholder = 'Password'" onblur="this.placeholder = 'Password '" >
+                  </div>
+                  <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name error</div>
                 </div>
-                <div class="form-group offset-top-20">
-                  <input class="form-control input-sm form-control-impressed" type="text" name="confirmPassword" placeholder="Confirm password " id="confirmPassword" onfocus="this.placeholder = 'Confirm password'" onblur="this.placeholder = 'Confirm password '">
+                <div class="form-group">
+                  <div>
+                    <input class="form-control input-sm form-control-impressed" type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm password "  onfocus="this.placeholder = 'Confirm password'" onblur="this.placeholder = 'Confirm password '" >
+                  </div>
+                  <div style="color: red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Name error</div>
                 </div>
+
                 <div class="group offset-top-20">
-                  <button class="btn btn-sm btn-primary" type="submit" style="padding-left: 30px; padding-right: 30px;">Sing in</button>
+                  <button class="btn btn-sm btn-primary" type="submit" style="padding-left: 30px; padding-right: 30px;">Registration</button>
                 </div>
               </form>
             </div>
