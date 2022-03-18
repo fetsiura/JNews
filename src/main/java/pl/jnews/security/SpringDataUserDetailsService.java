@@ -1,22 +1,24 @@
-package pl.jnews.security.service;
+package pl.jnews.security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import pl.jnews.security.Role;
-import pl.jnews.security.User;
+import pl.jnews.core.role.Role;
+import pl.jnews.core.user.User;
+import pl.jnews.core.user.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class DataUserDetailsService implements UserDetailsService {
+public class SpringDataUserDetailsService implements UserDetailsService {
 
 
     private UserService userService;
+
+    @Autowired
     public void setUserRepository(UserService userService) {
         this.userService = userService;
     }

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="wide wow-animation" lang="en">
+<head>
+  <title>Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link th:rel="icon" th:href="@{/images/favicon.png}" type="image/x-icon">
+  <link th:rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900">
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.css}" >
+  <link th:rel="stylesheet" th:href="@{/css/fonts.css}" >
+  <link th:rel="stylesheet" th:href="@{/css/style.css}" >
+  <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+</head>
+<body>
+<div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img th:src="@{/images/ie8-panel/warning_bar_0000_us.jpg}" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+<div class="preloader">
+  <div class="preloader-body">
+    <div class="loader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <p>Loading...</p>
+  </div>
+</div>
+<div class="page">
+  <header class="section page-header rd-navbar-transparent-wrap">
+    <!--RD Navbar-->
+    <div class="rd-navbar-wrap">
+      <nav class="rd-navbar rd-navbar-transparent" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="20px" data-xl-stick-up-offset="20px" data-xxl-stick-up-offset="20px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+        <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+        <div class="rd-navbar-aside-outer rd-navbar-collapse">
+          <div class="rd-navbar-aside">
+            <div class="rd-navbar-info">
+            </div>
+            <ul class="list-lined">
+              <li><a th:href="@{/login}">Log in</a></li>
+              <li><a th:href="@{/registration}">Create an account</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="rd-navbar-main-outer">
+          <div class="rd-navbar-main-inner">
+            <div class="rd-navbar-main">
+              <!--RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!--RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                <!--RD Navbar Brand-->
+                <div class="rd-navbar-brand">
+                  <!--Brand--><a class="brand" th:href="@{/}"><img class="brand-logo-dark" th:src="@{/images/logo-default-293x44.png}" alt="" width="146" height="22"/><img class="brand-logo-light" th:src="@{/images/logo-inverse-310x44.png}" alt="" width="155" height="22"/></a>
+                </div>
+              </div>
+              <div class="rd-navbar-main-element">
+                <div class="rd-navbar-nav-wrap">
+                  <ul class="rd-navbar-nav">
+                    <li class="rd-nav-item active"><a class="rd-nav-link" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/cryptocurrency}">Crypto</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/weather}">Weather</a>
+                    </li><li class="rd-nav-item"><a class="rd-nav-link" th:href="@{/contact}">Contacts</a>
+                  </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+<!--  login section-->
+  <section class="section bg-default section-md">
+    <div class="container">
+      <div class="row justify-content-md-center text-xl-left">
+        <div class="col-md-12">
+          <div class="row justify-content-sm-center">
+            <div class="col-sm-10 col-md-6 text-sm-left col-lg-6 col-xl-4 order-xl-3 order-lg-2 offset-xxl-1">
+              <!-- loginform -->
+              <h4 class="form-group">Registration:</h4>
+              <form class="rd-mailform offset-top-34 offset-lg-top-0 text-left" data-form-output="form-output-global" data-form-type="contact" method="post" th:action="@{/registration}">
+                <div class="form-group">
+                  <input class="form-control input-sm form-control-impressed" type="text" name="login" placeholder="Login " id="login" onfocus="this.placeholder = 'Login'" onblur="this.placeholder = 'Login '" >
+                </div>
+                <div class="form-group">
+                  <input class="form-control input-sm form-control-impressed" type="text" name="email" placeholder="Email " id="email" onfocus="this.placeholder = 'Email'" onblur="this.placeholder = 'Email '" >
+                </div>
+                <div class="form-group offset-top-20">
+                  <input class="form-control input-sm form-control-impressed" type="text" name="password" placeholder="Password " id="password" onfocus="this.placeholder = 'Password'" onblur="this.placeholder = 'Password '">
+                </div>
+                <div class="form-group offset-top-20">
+                  <input class="form-control input-sm form-control-impressed" type="text" name="confirmPassword" placeholder="Confirm password " id="confirmPassword" onfocus="this.placeholder = 'Confirm password'" onblur="this.placeholder = 'Confirm password '">
+                </div>
+                <div class="group offset-top-20">
+                  <button class="btn btn-sm btn-primary" type="submit" style="padding-left: 30px; padding-right: 30px;">Sing in</button>
+                </div>
+              </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+
+  <footer class="section footer-classic">
+    <div class="footer-inner-1">
+      <div class="container">
+        <div class="row row-40">
+          <div class="col-md-5 col-lg-3">
+            <h5>Our Contacts</h5>
+            <ul class="contact-list font-weight-bold">
+              <li>
+                <div class="unit unit-spacing-xs">
+                  <div class="unit-left">
+                    <div class="icon icon-sm icon-primary novi-icon mdi mdi-map-marker"></div>
+                  </div>
+                  <div class="unit-body"><a>Warsaw</a></div>
+                </div>
+              </li>
+            </ul><a class="d-inline-block big" href="mailto:#">fetsiura@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-inner-2">
+      <div class="container">
+        <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span>. All Rights Reserved. Design by <a href="https://www.templatemonster.com">TemplateMonster</a></p>
+      </div>
+    </div>
+  </footer>
+</div>
+<div class="snackbars" id="form-output-global"></div>
+<script th:src="@{/js/core.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<!--coded by Starlight-->
+</body>
+</html>

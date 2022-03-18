@@ -1,4 +1,4 @@
-package pl.jnews.security;
+package pl.jnews.core.user;
 
 import lombok.Data;
 

@@ -1,8 +1,5 @@
-package pl.jnews.security.service;
+package pl.jnews.core.user;
 
-
-import pl.jnews.security.User;
-import pl.jnews.security.UserDto;
 
 public interface UserService {
 

@@ -1,6 +1,7 @@
-package pl.jnews.security;
+package pl.jnews.core.user;
 
 import lombok.Data;
+import pl.jnews.core.role.Role;
 
 import javax.persistence.*;
 import java.util.Set;
