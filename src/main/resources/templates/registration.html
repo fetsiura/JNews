@@ -109,7 +109,7 @@
                   <div>
                     <input class="form-control input-sm form-control-impressed" type="password" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm password "  onfocus="this.placeholder = 'Confirm password'" onblur="this.placeholder = 'Confirm password '" >
                   </div>
-                  <div style="color: red" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">Name error</div>
+                  <div style="color: red" th:text="${errorConf} ? ${errorConf.toString()} : ''">Name error</div>
                 </div>
 
                 <div class="group offset-top-20">

@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @RequestMapping()
 @RequiredArgsConstructor
 @Slf4j
-public class LoginRegistrationController {
+public class LoginNRegistrController {
 
     private final UserServiceImplement userService;
 
@@ -29,16 +29,18 @@ public class LoginRegistrationController {
     }
 
     @PostMapping("/registration")
-    public String postRegistration(@ModelAttribute("userDto") @Valid UserDto userDto,
+    public String postRegistration(Model model,@ModelAttribute("userDto") @Valid UserDto userDto,
                                    BindingResult result){
-       log.error(userDto.toString());
-        if(result.hasErrors()){
 
+       if(result.hasErrors()){
             return "registration";
-        }
+       }
+       if(!userDto.getPassword().equals(userDto.getConfirmPassword())) {
+           model.addAttribute("errorConf", "Password not confirm");
+           return "registration"; }
 
-        userService.saveUser(userDto);
-        return "redirect:/login";
+       userService.saveUser(userDto);
+       return "redirect:/login";
     }
 
     @GetMapping("/login")

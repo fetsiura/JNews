@@ -4,16 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.jnews.core.crypto.Crypto;
 import pl.jnews.core.crypto.CryptoServiceImplement;
 import pl.jnews.core.news.NewsServiceImplement;
-import pl.jnews.core.user.UserServiceImplement;
-import pl.jnews.core.weather.CityServiceImplement;
-import pl.jnews.core.user.UserDto;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +16,7 @@ import java.util.List;
 @org.springframework.stereotype.Controller
 @RequiredArgsConstructor
 @RequestMapping("/")
-class Controller {
+class NonLoginUserController {
 
     private final NewsServiceImplement newsService;
     private final CryptoServiceImplement cryptoService;

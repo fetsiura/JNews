@@ -59,7 +59,7 @@ public class NewsDataClient {
             converter.setSource(newsResponse.getSource().getName());
             convertedNews.add(converter);
         }
-        log.info("APICounter - {}", APICounter++);
+        log.info("APINewsCounter - {}", APICounter++);
         return convertedNews;
 
     }

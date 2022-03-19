@@ -3,9 +3,9 @@ package pl.jnews.core.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.jnews.core.user.SpecialAdnotations.EmailAlreadyExists;
+import pl.jnews.core.user.SpecialAdnotations.EmailUserValid;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -14,19 +14,15 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class UserDto {
 
-    @NotEmpty(message = "Name should not be empty")
-    @Size(min = 3, max = 10)
+    @Size(min = 3, message = "Login should be included min 3 characters")
     private String login;
 
-    @NotEmpty(message = "Email should not be empty")
-    @Email(message = "Email should be valid")
+    @EmailUserValid(message = "Email should be valid")
+    @EmailAlreadyExists(message = "Email already exists")
     private String email;
 
-    @NotEmpty(message = "Password should not be empty")
-    @Size(min = 8,message = "Password should be included minimum 8 characters")
+    @Size(min = 8,message = "Password should be included min 8 characters")
     private String password;
 
-    @NotEmpty(message = "Password confirm should not be empty")
-    @Size(min = 8,message = "Password confirm should be included minimum 8 characters")
     private String confirmPassword;
 }

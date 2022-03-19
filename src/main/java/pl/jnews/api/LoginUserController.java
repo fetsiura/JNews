@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserController {
+public class LoginUserController {
 
     private final CityServiceImplement cityService;
 
