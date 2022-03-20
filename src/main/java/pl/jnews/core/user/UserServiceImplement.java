@@ -3,13 +3,12 @@ package pl.jnews.core.user;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.jnews.core.role.Role;
 import pl.jnews.core.role.RoleRepository;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -18,7 +17,7 @@ public class UserServiceImplement implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-//    private final BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public User findByEmail(String email) {
@@ -33,23 +32,26 @@ public class UserServiceImplement implements UserService {
         user.setLogin(userDto.getLogin());
         user.setEmail(userDto.getEmail());
         user.setPassword(
-                userDto.getPassword());
-//                passwordEncoder.encode(userDto.getPassword()));
+                passwordEncoder.encode(userDto.getPassword()));
         user.setEnabled(1);
-        if(roleRepository.findByName("ROLE_USER") == null){
+
+        if(roleRepository.findById(1L).isEmpty()){
             createRole();
         }
-        Role userRole = roleRepository.findByName("USER_ROLE");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        Optional<Role> userRole = roleRepository.findById(1L);
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole.get())));
         userRepository.save(user);
         log.info("User with email {} created",user.getEmail());
+
+
     }
 
     public void createRole(){
 
         Role role = new Role();
         role.setName("ROLE_USER");
-        log.info("Role USER created");
         roleRepository.save(role);
+        log.info("Role USER created");
+
     }
 }

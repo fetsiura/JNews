@@ -5,10 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import pl.jnews.core.user.User;
 import pl.jnews.core.user.UserDto;
 import pl.jnews.core.user.UserServiceImplement;
 
@@ -46,5 +44,25 @@ public class LoginNRegistrController {
     @GetMapping("/login")
     public String login(){
         return "login";
+    }
+
+
+    @GetMapping("/create")
+    public String create(){
+        UserDto userDto = new UserDto();
+        userDto.setLogin("jaro");
+        userDto.setEmail("fetsiura@gmail.com");
+        userDto.setPassword("Liga2020");
+        userDto.setConfirmPassword("Liga2020");
+        userService.saveUser(userDto);
+        return "redirect:/login";
+
+    }
+
+
+    @GetMapping("/check")
+    @ResponseBody
+    public String check(){
+        return userService.findByEmail("fetsiura@gmail.com").toString();
     }
 }
