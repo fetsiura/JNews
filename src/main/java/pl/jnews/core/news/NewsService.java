@@ -4,7 +4,7 @@ import java.util.List;
 
 interface NewsService {
 
-    List<News> getNewsFromDatabase();
+    List<News> getNewsFromId(Long id);
     List<News> getNewsWhenInputEmpty();
     List<News> getNewsWithCategory(String category);
     void add(News news);

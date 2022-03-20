@@ -13,15 +13,7 @@
   <!-- News GROUP-->
   <section class="section bg-default section-md">
     <div class="container">
-      <h2 class="title-icon"><span class="icon icon-default mercury-icon-news"></span><span>Breaking <span class="text-light">NEWS</span></span></h2>
-      <div class="row row-30">
-        <!--            news input -->
-        <form th:action="@{/user/dashboard}" method="post">
-          <div class="col-md-10 wow fadeInUp">
-            <input type="text" class="input col-md-10" name="category" placeholder="Write category ..."> <button type="submit" class="button-circle search-submit" >SHOW</button>
-          </div>
-        </form>
-      </div>
+      <h2 class="title-icon"><span class="icon icon-default mercury-icon-news"></span><span>Favorite <span class="text-light">NEWS</span></span></h2>
       <!--          news generator-->
 
       <div th:each="oneNews: ${news}" class="box-image-small box-image-small-left">
@@ -33,14 +25,11 @@
           <h4><a th:text="${oneNews.title}"></a></h4>
           <p class="big" th:text="${oneNews.description}"></p>
         </div>
-        <div><a target="_blank" rel="noopener noreferrer" th:href="@{'/user/news/add?title=' + ${oneNews.title} + '&url=' + ${oneNews.url} + '&urlToImage=' + ${oneNews.urlToImage} +'&description=' + ${oneNews.description} + '&source='+ ${oneNews.source} +'&userId='+ ${userId}}"   type="button" class="btn-group-toggle">ADD...</a> </div>
         <div><a th:href="${oneNews.url}"  target="_blank" rel="noopener noreferrer" type="button" class="btn-group-toggle">MORE...</a> </div>
         <p>           </p><br>
         <p>           </p><br>
       </div>
-      <div>
-        <span th:text="${error}"></span>
-      </div>
+
     </div>
   </section>
 

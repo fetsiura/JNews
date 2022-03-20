@@ -33,7 +33,7 @@ class NonLoginUserController {
     public String homeWithCategory(Model model,
                                    @Param("category") String category){
 
-        if(check(category)){
+        if(newsService.check(category)){
             model.addAttribute("news", newsService.getNewsWithCategory(category));
         } else {
             model.addAttribute("error","Bad request, please try to describe differently.");
@@ -86,17 +86,7 @@ class NonLoginUserController {
     }
 
 
-    Boolean check(String word){
-        String search ="";
-        boolean flag = true;
-        if(!word.isEmpty() || !word.isBlank()){
-            search=word.replaceAll("[^a-zA-Z 0-9 - \\s]", "");
-            if(search.isBlank() || search.isEmpty() || search.length()<2){
-                flag=false;
-            }
-        }
-        return flag;
-        }
+
 
 
 }

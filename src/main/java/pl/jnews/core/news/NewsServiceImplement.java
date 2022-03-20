@@ -23,8 +23,8 @@ public class NewsServiceImplement implements NewsService{
 
 
     @Override
-    public List<News> getNewsFromDatabase() {
-        return newsRepository.findAll();
+    public List<News> getNewsFromId(Long id) {
+        return newsRepository.findAllByUserId(id);
     }
 
     @Override
@@ -40,11 +40,24 @@ public class NewsServiceImplement implements NewsService{
 
     @Override
     public void add(News news) {
-
+        newsRepository.save(news);
+        log.info("News added");
     }
 
     @Override
     public void delete(Long id) {
 
+    }
+
+    public Boolean check(String word){
+        String search ="";
+        boolean flag = true;
+        if(!word.isEmpty() || !word.isBlank()){
+            search=word.replaceAll("[^a-zA-Z 0-9 - \\s]", "");
+            if(search.isBlank() || search.isEmpty() || search.length()<2){
+                flag=false;
+            }
+        }
+        return flag;
     }
 }
