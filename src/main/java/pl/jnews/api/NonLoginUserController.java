@@ -3,6 +3,7 @@ package pl.jnews.api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.jnews.core.crypto.Crypto;
@@ -44,20 +45,28 @@ class NonLoginUserController {
 
     ////kontrolery kryptowalut
     @GetMapping("/cryptocurrency")
-    public String cryptocurrencyGetForm(Model model){
+    public String cryptocurrencyGetForm(Model model,
+                                        @CurrentSecurityContext(expression="authentication?.name")
+                                                String username){
 
         if(cryptoService.countAllCrypto()<1){
             cryptoService.addCryptoToDatabase();
         }
         model.addAttribute("cryptos",cryptoService.findByNameASC());
 
+        ///widok dla zalogowanego
+        if(!username.equals("anonymousUser")){
+            return "user/cryptocurrency";
+        }
         return "cryptocurrency";
     }
 
     @PostMapping("/cryptocurrency")
     public String cryptocurrencyPostForm(Model model,
                                          @Param("filter") String filter,
-                                         @Param("name")String name){
+                                         @Param("name")String name,
+                                         @CurrentSecurityContext(expression="authentication?.name")
+                                                     String username){
         List<Crypto> cryptos = new ArrayList<>();
 
         //jeżeli nie wpisano nazwy kryptowaluty sortujemy po wybranym wskaźniku
@@ -75,13 +84,23 @@ class NonLoginUserController {
         }
         model.addAttribute("cryptos",cryptos);
 
+
+        ///widok dla zalogowanego
+        if(!username.equals("anonymousUser")){
+            return "user/cryptocurrency";
+        }
         return "cryptocurrency";
     }
 
 
 
     @GetMapping("/contact")
-    public String getContacts(){
+    public String getContacts(@CurrentSecurityContext(expression="authentication?.name")
+                                          String username){
+        ///widok dla zalogowanego
+        if(!username.equals("anonymousUser")){
+            return "user/contact";
+        }
         return "contact";
     }
 

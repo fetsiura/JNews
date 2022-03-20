@@ -31,13 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/h2/**").permitAll()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user/**").hasAnyRole("USER")
+                .antMatchers("/dashboard","/weather","/favorite").hasAnyRole("USER")
                 .anyRequest().permitAll()
                 .and().formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/user/dashboard")
+                .defaultSuccessUrl("/dashboard")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout","POST"))

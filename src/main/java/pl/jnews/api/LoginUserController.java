@@ -28,12 +28,11 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/user")
+@RequestMapping()
 public class LoginUserController {
 
     private final CityServiceImplement cityService;
     private final NewsServiceImplement newsService;
-    private final CryptoServiceImplement cryptoService;
     private final UserServiceImplement userService;
 
     @GetMapping("/dashboard")
@@ -76,6 +75,9 @@ public class LoginUserController {
         return "user/favorite";
     }
 
+
+
+    //kontroler dla dodawania wiadomości do ulubionych
     @GetMapping("/news/add")
     @ResponseBody
     public String addNews(@Param("title") String title,
@@ -136,49 +138,5 @@ public class LoginUserController {
         model.addAttribute("cities",cities);
         return "user/weather";
     }
-
-    ////kontrolery kryptowalut
-    @GetMapping("/cryptocurrency")
-    public String cryptocurrencyGetForm(Model model){
-
-        if(cryptoService.countAllCrypto()<1){
-            cryptoService.addCryptoToDatabase();
-        }
-        model.addAttribute("cryptos",cryptoService.findByNameASC());
-
-        return "user/cryptocurrency";
-    }
-
-    @PostMapping("/cryptocurrency")
-    public String cryptocurrencyPostForm(Model model,
-                                         @Param("filter") String filter,
-                                         @Param("name")String name){
-        List<Crypto> cryptos = new ArrayList<>();
-
-        //jeżeli nie wpisano nazwy kryptowaluty sortujemy po wybranym wskaźniku
-        if(name.isEmpty()){
-            if (filter.contains("priceHighToLow")) {
-                cryptos=cryptoService.findByPriceDESC();
-            } else if (filter.contains("priceLowToHigh")) {
-                cryptos=cryptoService.findByPriceASC();
-            } else {
-                cryptos=cryptoService.findByNameASC();
-            }
-        } else {
-
-            cryptos=cryptoService.findByNameStartsWith(name);
-        }
-        model.addAttribute("cryptos",cryptos);
-
-        return "user/cryptocurrency";
-    }
-
-
-
-    @GetMapping("/contact")
-    public String getContacts(){
-        return "user/contact";
-    }
-
 
 }

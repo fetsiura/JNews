@@ -18,7 +18,7 @@
       <div class="row row-30">
         <!--            crypto input -->
 
-        <form th:action="@{/user/cryptocurrency}" method="post">
+        <form th:action="@{/cryptocurrency}" method="post">
           <div class="col-md-10 wow fadeInUp">
 
             <select class="input col-md-10" name="filter">
@@ -28,7 +28,7 @@
           </div>
 
           <div class="col-md-10 wow fadeInUp">
-            <input type="text" class="input col-md-10" name="name" placeholder="Find crypto ..."> <button type="submit" class="button-circle search-submit" >FIND</button>
+            <input type="text" class="input col-md-10" name="name" placeholder="Find crypto ..."> <button type="submit" class="btn btn-sm btn-primary" style="padding-left: 30px; padding-right: 30px;"  >FIND</button>
           </div>
         </form>
       </div>

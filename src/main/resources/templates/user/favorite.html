@@ -17,7 +17,7 @@
       <!--          news generator-->
 
       <div th:each="oneNews: ${news}" class="box-image-small box-image-small-left">
-        <div class="item-image bg-image novi-nackground" >
+        <div class="item-image bg-image novi-background" >
           <img th:width="445" th:height="200"  th:src="${oneNews.urlToImage}" alt="" >
         </div>
         <div class="item-body wow fadeInRight">
@@ -25,7 +25,7 @@
           <h4><a th:text="${oneNews.title}"></a></h4>
           <p class="big" th:text="${oneNews.description}"></p>
         </div>
-        <div><a th:href="${oneNews.url}"  target="_blank" rel="noopener noreferrer" type="button" class="btn-group-toggle">MORE...</a> </div>
+        <div><a th:href="${oneNews.url}"  target="_blank" rel="noopener noreferrer" type="button" class="btn btn-sm btn-primary" style="padding-left: 30px; padding-right: 30px;" >MORE...</a> </div>
         <p>           </p><br>
         <p>           </p><br>
       </div>

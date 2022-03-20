@@ -41,7 +41,7 @@ public class NewsServiceImplement implements NewsService{
     @Override
     public void add(News news) {
         newsRepository.save(news);
-        log.info("News added");
+        log.info("News o id {} added",news.getId());
     }
 
     @Override
