@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.jnews.infrastructure.weatherdata.WeatherDataClient;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,8 +20,10 @@ public class CityServiceImplement implements CityService{
     private final WeatherDataClient weatherDataClient;
 
     @Override
-    public void addCityToDatabase() {
-        cityRepository.saveAll(weatherDataClient.citiesWeatherHandler());
+    public void addCityToDatabase(HttpSession session) {
+        List<City> cities = weatherDataClient.citiesWeatherHandler();
+        cityRepository.saveAll(cities);
+        session.setAttribute("citiesLastUpdate",cities.get(0).getUpdated());
         log.info("Cities download to database");
     }
 

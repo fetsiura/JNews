@@ -55,7 +55,15 @@ public class NewsDataClient {
             converter.setTitle(newsResponse.getTitle());
             converter.setUrl(newsResponse.getUrl());
             converter.setUrlToImage(newsResponse.getUrlToImage());
-            converter.setDescription(newsResponse.getDescription());
+            String description = newsResponse.getDescription();
+            if(description ==null){
+                description="";
+            }
+
+            if(description.length()>176){
+                description=description.substring(0,176).concat("...");
+            }
+            converter.setDescription(description);
             converter.setSource(newsResponse.getSource().getName());
             convertedNews.add(converter);
         }

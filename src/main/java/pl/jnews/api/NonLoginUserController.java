@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.jnews.core.crypto.Crypto;
 import pl.jnews.core.crypto.CryptoServiceImplement;
+import pl.jnews.core.news.News;
 import pl.jnews.core.news.NewsServiceImplement;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +37,11 @@ class NonLoginUserController {
                                    @Param("category") String category){
 
         if(newsService.check(category)){
-            model.addAttribute("news", newsService.getNewsWithCategory(category));
+            List<News> newsWithCategory = newsService.getNewsWithCategory(category);
+            if(newsWithCategory.size()==0 ){
+                model.addAttribute("error","Bad request, please try to describe differently.");
+            }
+            model.addAttribute("news", newsWithCategory);
         } else {
             model.addAttribute("error","Bad request, please try to describe differently.");
         }
@@ -47,13 +53,13 @@ class NonLoginUserController {
     @GetMapping("/cryptocurrency")
     public String cryptocurrencyGetForm(Model model,
                                         @CurrentSecurityContext(expression="authentication?.name")
-                                                String username){
+                                                String username, HttpSession session){
 
         if(cryptoService.countAllCrypto()<1){
-            cryptoService.addCryptoToDatabase();
+            cryptoService.addCryptoToDatabase(session);
         }
         model.addAttribute("cryptos",cryptoService.findByNameASC());
-
+        model.addAttribute("cryptoLastUpdate",session.getAttribute("cryptoLastUpdate"));
         ///widok dla zalogowanego
         if(!username.equals("anonymousUser")){
             return "user/cryptocurrency";
@@ -66,7 +72,8 @@ class NonLoginUserController {
                                          @Param("filter") String filter,
                                          @Param("name")String name,
                                          @CurrentSecurityContext(expression="authentication?.name")
-                                                     String username){
+                                                     String username,
+                                         HttpSession session){
         List<Crypto> cryptos = new ArrayList<>();
 
         //jeżeli nie wpisano nazwy kryptowaluty sortujemy po wybranym wskaźniku
@@ -82,8 +89,12 @@ class NonLoginUserController {
 
             cryptos=cryptoService.findByNameStartsWith(name);
         }
-        model.addAttribute("cryptos",cryptos);
 
+        if(cryptos.size()==0){
+            model.addAttribute("nonCrypto","Our database does not contain such cryptocurrency.");
+        }
+        model.addAttribute("cryptos",cryptos);
+        model.addAttribute("cryptoLastUpdate",session.getAttribute("cryptoLastUpdate"));
 
         ///widok dla zalogowanego
         if(!username.equals("anonymousUser")){

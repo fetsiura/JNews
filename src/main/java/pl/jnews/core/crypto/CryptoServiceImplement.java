@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.jnews.infrastructure.cryptodata.CryptoDataClient;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Locale;
 
@@ -17,8 +18,11 @@ public class CryptoServiceImplement implements CryptoService{
     private final CryptoDataClient cryptoDataClient;
 
     @Override
-    public void addCryptoToDatabase() {
-        cryptoRepository.saveAll(cryptoDataClient.cryptoHandler());
+    public void addCryptoToDatabase(HttpSession session) {
+
+        List<Crypto> cryptos = cryptoDataClient.cryptoHandler();
+        cryptoRepository.saveAll(cryptos);
+        session.setAttribute("cryptoLastUpdate",cryptos.get(0).getUpdated());
         log.info("Crypto download to database");
     }
 

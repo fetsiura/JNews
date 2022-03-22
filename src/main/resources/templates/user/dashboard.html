@@ -32,7 +32,17 @@
           <p th:text="${oneNews.source}"></p>
           <h4><a th:text="${oneNews.title}"></a></h4>
           <p class="big" th:text="${oneNews.description}"></p>
-          <a target="_blank" rel="nofollow" th:href="@{'/news/add?title=' + ${oneNews.title} + '&url=' + ${oneNews.url} + '&urlToImage=' + ${oneNews.urlToImage} +'&description=' + ${oneNews.description} + '&source='+ ${oneNews.source} +'&userId='+ ${userId}}"   type="button" style="padding-left: 30px;" class="btn btn-sm btn-primary">ADD TO FAVORITE</a>
+
+<!--          <form th:action="@{/favorite}" th:method="post">-->
+<!--            <input type="hidden" name="title" th:value="${oneNews.title}">-->
+<!--            <input type="hidden" name="url" th:value="${oneNews.url}">-->
+<!--            <input type="hidden" name="urlToImage" th:value="${oneNews.urlToImage}">-->
+<!--            <input type="hidden" name="description" th:value="${oneNews.description}">-->
+<!--            <input type="hidden" name="source" th:value="${oneNews.source}">-->
+<!---->
+<!--            <button type="submit" target="_blank" rel="noopener noreferrer" style="padding-left: 30px;" class="btn btn-sm btn-primary">Add favorite</button>-->
+<!--          </form>-->
+          <a target="_blank" rel="noopener noreferrer" th:href="@{'/favorite?title=' + ${oneNews.title} + '&url=' + ${oneNews.url} + '&urlToImage=' + ${oneNews.urlToImage} +'&description=' + ${oneNews.description} + '&source='+ ${oneNews.source} }"   type="button" style="padding-left: 30px;" class="btn btn-sm btn-primary">ADD TO FAVORITE</a>
         </div>
         <div><a th:href="${oneNews.url}" class="btn btn-sm btn-primary" style="padding-left: 30px; padding-right: 30px;"  target="_blank" rel="noopener noreferrer" type="button" >MORE...</a> </div>
         <p>           </p><br>

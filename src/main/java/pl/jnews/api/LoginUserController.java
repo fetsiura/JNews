@@ -23,6 +23,7 @@ import pl.jnews.core.weather.CityServiceImplement;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Secured("ROLE_USER")
 @Controller
@@ -41,10 +42,6 @@ public class LoginUserController {
                                @CurrentSecurityContext(expression="authentication?.name")
                                            String username){
 
-        if(session.getAttribute("userEmail") ==null){
-            session.setAttribute("userLogin",userService.findByEmail(username).getLogin());
-        }
-        model.addAttribute("userId",userService.findByEmail(username).getId());
         model.addAttribute("news",newsService.getNewsWhenInputEmpty());
         return "user/dashboard";
     }
@@ -61,7 +58,6 @@ public class LoginUserController {
         } else {
             model.addAttribute("error","Bad request, please try to describe differently.");
         }
-        model.addAttribute("userId",userService.findByEmail(username).getId());
 
         return "user/dashboard";
     }
@@ -69,50 +65,44 @@ public class LoginUserController {
     @GetMapping("/favorite")
     public String getFavorite(Model model,
                               @CurrentSecurityContext(expression="authentication?.name")
-                                          String username){
+                                          String username,
+                              @Param("title") Optional<String> title,
+                              @Param("url")Optional<String> url,
+                              @Param("urlToImage")Optional<String> urlToImage,
+                              @Param("description")Optional<String> description,
+                              @Param("source") Optional<String> source){
+        if(title.isPresent() && url.isPresent() && urlToImage.isPresent() && description.isPresent() && source.isPresent()){
+            News news = new News();
+            news.setTitle(title.get());
+            news.setUrl(url.get());
+            news.setUrlToImage(urlToImage.get());
+            news.setDescription(description.get());
+            news.setSource(source.get());
+            news.setUserId(userService.findByEmail(username).getId());
+            newsService.add(news);
+        }
+
         model.addAttribute("news",newsService.getNewsFromId(userService.findByEmail(username).getId()));
 
         return "user/favorite";
     }
 
 
-
-    //kontroler dla dodawania wiadomości do ulubionych
-    @GetMapping("/news/add")
-    @ResponseBody
-    public String addNews(@Param("title") String title,
-                          @Param("url")String url,
-                          @Param("urlToImage")String urlToImage,
-                          @Param("description")String description,
-                          @Param("source") String source,
-                          @Param("userId") String userId){
-
-        News news = new News();
-        news.setTitle(title);
-        news.setUrl(url);
-        news.setUrlToImage(urlToImage);
-        news.setDescription(description);
-        news.setSource(source);
-        news.setUserId(Long.parseLong(userId));
-        newsService.add(news);
-
-        return "added";
-
-    }
-
     ////kontrolery pogody
     @GetMapping("/weather")
-    public String getWeather(Model model){
+    public String getWeather(Model model,
+                             HttpSession session){
         if(cityService.countAllCity()<1){
-            cityService.addCityToDatabase();
+            cityService.addCityToDatabase(session);
         }
-        
+        model.addAttribute("citiesLastUpdate",session.getAttribute("citiesLastUpdate"));
         model.addAttribute("cities",cityService.cityByNameASC());
         return "user/weather";
     }
 
     @PostMapping("/weather")
     public String getWeather(Model model,
+                             HttpSession session,
                              @Param("filter") String filter,
                              @Param("name")String name){
         List<City> cities = new ArrayList<>();
@@ -135,6 +125,11 @@ public class LoginUserController {
         } else {
             cities=cityService.cityByNameStartWith(name);
         }
+
+        if(cities.size()==0){
+            model.addAttribute("nonCities","Our database does not contain such city.");
+        }
+        model.addAttribute("citiesLastUpdate",session.getAttribute("citiesLastUpdate"));
         model.addAttribute("cities",cities);
         return "user/weather";
     }

@@ -14,7 +14,7 @@
   <section class="section bg-default section-md">
     <div class="container">
       <h2 class="title-icon"><span class="icon icon-default mercury-icon-news"></span><span>Crypto <span class="text-light">currencies</span></span></h2>
-      <h5 class="title-icon"><span>Last update: <span class="text-light" th:text="${cryptos.get(0).getUpdated().toString()}"></span></span></h5>
+      <h5 class="title-icon"><span>Last update: <span class="text-light" th:text="${cryptoLastUpdate}"></span></span></h5>
       <div class="row row-30">
         <!--            crypto input -->
 
@@ -50,6 +50,9 @@
         </tr>
         </tbody>
       </table>
+      <div>
+        <span th:text="${nonCrypto}"></span>
+      </div>
       <div>
       </div>
     </div>
