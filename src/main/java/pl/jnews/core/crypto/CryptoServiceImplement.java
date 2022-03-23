@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import pl.jnews.infrastructure.cryptodata.CryptoDataClient;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @Slf4j
 @Service
@@ -18,12 +21,10 @@ public class CryptoServiceImplement implements CryptoService{
     private final CryptoDataClient cryptoDataClient;
 
     @Override
-    public void addCryptoToDatabase(HttpSession session) {
-
+    public void addCryptoToDatabase() {
         List<Crypto> cryptos = cryptoDataClient.cryptoHandler();
         cryptoRepository.saveAll(cryptos);
-        session.setAttribute("cryptoLastUpdate",cryptos.get(0).getUpdated());
-        log.info("Crypto download to database");
+        log.info("Crypto download to database {}",LocalTime.now());
     }
 
 
@@ -45,6 +46,23 @@ public class CryptoServiceImplement implements CryptoService{
 
     public List<Crypto> findByNameStartsWith(String name){
         return cryptoRepository.findByNameStartsWith(name.toLowerCase(Locale.ROOT));
+    }
+
+    public  void runUpdateCryptoTimer(){
+        TimerTask crypto = new TimerTask() {
+            public void run() {
+                addCryptoToDatabase();
+            }
+        };
+        Timer timer = new Timer("Timer");
+
+        long delay = 1000L;
+        /////////////////////sec    min    god
+//        long period = 1000L * 60L * 60L * 24L;
+
+        /////update kursu co 20 min
+        long period = 1000L * 60L * 20L;
+        timer.scheduleAtFixedRate(crypto, delay, period);
     }
 
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CryptoRepository extends JpaRepository<Crypto,Long> {
+interface CryptoRepository extends JpaRepository<Crypto,Long> {
     @Query(nativeQuery = true,
             value = "SELECT * FROM crypto ORDER BY name ASC")
     List<Crypto> findCryptoByNameAtoZ();

@@ -26,7 +26,12 @@ class NonLoginUserController {
 
     //// wyszukiwanie wiadomości
     @GetMapping
-    public String home(Model model){
+    public String home(Model model,
+                       @CurrentSecurityContext(expression="authentication?.name")
+                               String username){
+        if(!username.equals("anonymousUser")){
+            return "redirect:/dashboard";
+        }
             model.addAttribute("news",newsService.getNewsWhenInputEmpty());
             return "index";
     }
@@ -55,15 +60,19 @@ class NonLoginUserController {
                                         @CurrentSecurityContext(expression="authentication?.name")
                                                 String username, HttpSession session){
 
-        if(cryptoService.countAllCrypto()<1){
-            cryptoService.addCryptoToDatabase(session);
+        List<Crypto> byNameASC = cryptoService.findByNameASC();
+        if(session.getAttribute("cryptoLastUpdate")==null){
+            session.setAttribute("cryptoLastUpdate",byNameASC.get(0).getUpdated());
         }
+
         model.addAttribute("cryptos",cryptoService.findByNameASC());
-        model.addAttribute("cryptoLastUpdate",session.getAttribute("cryptoLastUpdate"));
+
         ///widok dla zalogowanego
         if(!username.equals("anonymousUser")){
             return "user/cryptocurrency";
         }
+
+
         return "cryptocurrency";
     }
 
@@ -72,8 +81,7 @@ class NonLoginUserController {
                                          @Param("filter") String filter,
                                          @Param("name")String name,
                                          @CurrentSecurityContext(expression="authentication?.name")
-                                                     String username,
-                                         HttpSession session){
+                                                     String username){
         List<Crypto> cryptos = new ArrayList<>();
 
         //jeżeli nie wpisano nazwy kryptowaluty sortujemy po wybranym wskaźniku
@@ -94,12 +102,12 @@ class NonLoginUserController {
             model.addAttribute("nonCrypto","Our database does not contain such cryptocurrency.");
         }
         model.addAttribute("cryptos",cryptos);
-        model.addAttribute("cryptoLastUpdate",session.getAttribute("cryptoLastUpdate"));
 
         ///widok dla zalogowanego
         if(!username.equals("anonymousUser")){
             return "user/cryptocurrency";
         }
+
         return "cryptocurrency";
     }
 

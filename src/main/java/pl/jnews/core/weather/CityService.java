@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface CityService {
 
-    void addCityToDatabase(HttpSession session);
+    void addCityToDatabase();
 
 }

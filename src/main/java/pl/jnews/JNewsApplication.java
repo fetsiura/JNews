@@ -10,4 +10,5 @@ public class JNewsApplication {
         SpringApplication.run(JNewsApplication.class, args);
     }
 
+
 }

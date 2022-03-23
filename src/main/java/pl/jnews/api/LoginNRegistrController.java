@@ -2,6 +2,7 @@ package pl.jnews.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,7 +43,12 @@ public class LoginNRegistrController {
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login(@CurrentSecurityContext(expression="authentication?.name")
+                                    String username){
+
+        if(!username.equals("anonymousUser")){
+            return "redirect:/dashboard";
+        }
         return "login";
     }
 
@@ -59,10 +65,4 @@ public class LoginNRegistrController {
 
     }
 
-
-    @GetMapping("/check")
-    @ResponseBody
-    public String check(){
-        return userService.findByEmail("fetsiura@gmail.com").toString();
-    }
 }

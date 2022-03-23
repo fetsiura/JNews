@@ -23,6 +23,7 @@ import pl.jnews.core.weather.CityServiceImplement;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Secured("ROLE_USER")
@@ -43,6 +44,11 @@ public class LoginUserController {
                                            String username){
 
         model.addAttribute("news",newsService.getNewsWhenInputEmpty());
+
+        ///imię usera zakładam do sesji
+        if(session.getAttribute("userNameTimeSession")==null){
+            session.setAttribute("userNameTimeSession",userService.findByEmail(username).getLogin().toUpperCase(Locale.ROOT));
+        }
         return "user/dashboard";
     }
 
@@ -92,17 +98,17 @@ public class LoginUserController {
     @GetMapping("/weather")
     public String getWeather(Model model,
                              HttpSession session){
-        if(cityService.countAllCity()<1){
-            cityService.addCityToDatabase(session);
+
+        List<City> cities = cityService.cityByNameASC();
+        if(session.getAttribute("citiesLastUpdate")==null){
+            session.setAttribute("citiesLastUpdate",cities.get(0).getUpdated());
         }
-        model.addAttribute("citiesLastUpdate",session.getAttribute("citiesLastUpdate"));
-        model.addAttribute("cities",cityService.cityByNameASC());
+        model.addAttribute("cities",cities);
         return "user/weather";
     }
 
     @PostMapping("/weather")
     public String getWeather(Model model,
-                             HttpSession session,
                              @Param("filter") String filter,
                              @Param("name")String name){
         List<City> cities = new ArrayList<>();
@@ -129,7 +135,6 @@ public class LoginUserController {
         if(cities.size()==0){
             model.addAttribute("nonCities","Our database does not contain such city.");
         }
-        model.addAttribute("citiesLastUpdate",session.getAttribute("citiesLastUpdate"));
         model.addAttribute("cities",cities);
         return "user/weather";
     }
