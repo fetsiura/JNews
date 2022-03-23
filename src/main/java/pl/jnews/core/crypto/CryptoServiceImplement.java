@@ -60,8 +60,8 @@ public class CryptoServiceImplement implements CryptoService{
         /////////////////////sec    min    god
 //        long period = 1000L * 60L * 60L * 24L;
 
-        /////update kursu co 20 min
-        long period = 1000L * 60L * 20L;
+        /////update kursu co 30 min
+        long period = 1000L * 60L * 30L;
         timer.scheduleAtFixedRate(crypto, delay, period);
     }
 

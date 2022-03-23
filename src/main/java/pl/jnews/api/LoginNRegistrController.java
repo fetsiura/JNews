@@ -52,17 +52,4 @@ public class LoginNRegistrController {
         return "login";
     }
 
-
-    @GetMapping("/create")
-    public String create(){
-        UserDto userDto = new UserDto();
-        userDto.setLogin("jaro");
-        userDto.setEmail("fetsiura@gmail.com");
-        userDto.setPassword("Liga2020");
-        userDto.setConfirmPassword("Liga2020");
-        userService.saveUser(userDto);
-        return "redirect:/login";
-
-    }
-
 }
