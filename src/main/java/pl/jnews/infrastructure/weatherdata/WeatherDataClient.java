@@ -23,7 +23,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class WeatherDataClient {
 
-    private final String TOKEN_1 ="d6db19042ae8152539fe0a5eb96edf51";
+    private final String TOKEN_1 ="ba346512291f1bd53eaaf287a9b5ff57";
     private final String TOKEN_2 ="c3d60a66719c359d03d4caf70fa4cda0";
     private final String TOKEN_3 ="08b79eb9131d8758f8b1d699f9e28534";
     private final String TOKEN_4 ="4fa7ddb13b7044e51c01ce51fc5c534a";
