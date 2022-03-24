@@ -55,20 +55,22 @@ public class NewsDataClient {
             converter.setTitle(newsResponse.getTitle());
             converter.setUrl(newsResponse.getUrl());
             converter.setUrlToImage(newsResponse.getUrlToImage());
-            String description = newsResponse.getDescription();
-            if(description ==null){
-                description="";
-            }
-
-            if(description.length()>176){
-                description=description.substring(0,176).concat("...");
-            }
-            converter.setDescription(description);
+            converter.setDescription(wordLengthLimit(newsResponse.getDescription()));
             converter.setSource(newsResponse.getSource().getName());
             convertedNews.add(converter);
         }
         log.info("APINewsCounter - {}", APICounter++);
         return convertedNews;
 
+    }
+
+    public String wordLengthLimit(String word){
+        if(word ==null){
+            word="";
+        }
+        if(word.length()>176){
+            word=word.substring(0,176).concat("...");
+        }
+        return word;
     }
 }
