@@ -60,12 +60,12 @@ class NonLoginUserController {
                                         @CurrentSecurityContext(expression="authentication?.name")
                                                 String username, HttpSession session){
 
-        List<Crypto> byNameASC = cryptoService.findByNameASC();
 
         if(cryptoService.countAllCrypto()<1){
             cryptoService.addCryptoToDatabase();
         }
 
+        List<Crypto> byNameASC = cryptoService.findByNameASC();
 
         if(session.getAttribute("cryptoLastUpdate")==null){
             session.setAttribute("cryptoLastUpdate",byNameASC.get(0).getUpdated());

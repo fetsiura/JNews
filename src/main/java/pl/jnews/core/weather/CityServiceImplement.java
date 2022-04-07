@@ -24,6 +24,7 @@ public class CityServiceImplement implements CityService{
 
     @Override
     public void addCityToDatabase() {
+        log.info("start update weather database {}",LocalTime.now());
         cityRepository.saveAll(weatherDataClient.citiesWeatherHandler());
         log.info("Cities download to database {}", LocalTime.now());
     }

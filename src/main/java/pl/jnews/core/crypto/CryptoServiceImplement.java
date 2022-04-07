@@ -22,6 +22,7 @@ public class CryptoServiceImplement implements CryptoService{
 
     @Override
     public void addCryptoToDatabase() {
+        log.info("start update cryptodatabase {}",LocalTime.now());
         List<Crypto> cryptos = cryptoDataClient.cryptoHandler();
         cryptoRepository.saveAll(cryptos);
         log.info("Crypto download to database {}",LocalTime.now());

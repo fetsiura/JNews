@@ -23,11 +23,11 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class WeatherDataClient {
 
-    private final String TOKEN_1 ="ba346512291f1bd53eaaf287a9b5ff57";
-    private final String TOKEN_2 ="c3d60a66719c359d03d4caf70fa4cda0";
-    private final String TOKEN_3 ="08b79eb9131d8758f8b1d699f9e28534";
-    private final String TOKEN_4 ="4fa7ddb13b7044e51c01ce51fc5c534a";
-    private final String TOKEN_5 ="5c78c534180f7942c971ea1fd93021c5";
+    private final String TOKEN_1 ="tokenba346512291f1bd53eaaf287a9b5ff57token";
+    private final String TOKEN_2 ="tokenc3d60a66719c359d03d4caf70fa4cda0token";
+    private final String TOKEN_3 ="token08b79eb9131d8758f8b1d699f9e28534token";
+    private final String TOKEN_4 ="token4fa7ddb13b7044e51c01ce51fc5c534atoken";
+    private final String TOKEN_5 ="token5c78c534180f7942c971ea1fd93021c5token";
     private final String url_1 = "https://api.openweathermap.org/data/2.5/weather?lat=";
     private final String url_2 = "&lon=";
     private final String url_3 = "&APPID=";
@@ -57,7 +57,7 @@ public class WeatherDataClient {
 
         for (String capital: capitals){
             String[] split = capital.split(";");
-            String url = url_1+split[2]+url_2+split[3]+url_3+TOKENIZER;
+            String url = url_1+split[2]+url_2+split[3]+url_3+TOKENIZER.substring(5,TOKENIZER.length()-5);
             ResponseEntity<ResponseWeatherHandler> exchange = restTemplate.exchange(url,
                     HttpMethod.GET,
                     entity,

@@ -18,10 +18,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NewsDataClient {
 
-    private final String TOKEN_1 = "d68ab16501944c5682a2f2c79945e4a6";
-    private final String TOKEN_2 = "27caad093f934fbfb3793aa077315440";
-    private final String TOKEN_3 = "02c5564a2cfd4a3c9cf537e2ea0e600e";
-    private final String TOKEN_4 = "1b1ecb3c525944aea82e789e45768979";
+    private final String TOKEN_1 = "tokend68ab16501944c5682a2f2c79945e4a6token";
+    private final String TOKEN_2 = "token27caad093f934fbfb3793aa077315440token";
+    private final String TOKEN_3 = "token02c5564a2cfd4a3c9cf537e2ea0e600etoken";
+    private final String TOKEN_4 = "token1b1ecb3c525944aea82e789e45768979token";
     private int APICounter = 1;
 
     private final RestTemplate restTemplate;
@@ -38,7 +38,7 @@ public class NewsDataClient {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity entity =new HttpEntity(httpHeaders);
-        httpHeaders.add("X-Api-Key",TOKENIZER);
+        httpHeaders.add("X-Api-Key",TOKENIZER.substring(5,TOKENIZER.length()-5));
         ResponseEntity<Response> response = restTemplate.exchange(url,
                 HttpMethod.GET,
                 entity,
