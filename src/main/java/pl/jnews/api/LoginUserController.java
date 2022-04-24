@@ -98,6 +98,9 @@ public class LoginUserController {
     @GetMapping("/weather")
     public String getWeather(Model model,
                              HttpSession session){
+        if(cityService.countAllCity()<1){
+            cityService.addCityToDatabase();
+        }
 
         List<City> cities = cityService.cityByNameASC();
         if(session.getAttribute("citiesLastUpdate")==null){
