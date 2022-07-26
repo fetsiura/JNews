@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.jnews.infrastructure.cryptodata.CryptoDataClient;
-
-import javax.servlet.http.HttpSession;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Locale;
